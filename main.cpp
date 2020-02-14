@@ -4,7 +4,8 @@
 #include "libro.hpp"
 using namespace std;
 
-Usuario usuarios[0];
+array<Usuario, 10> usuarios;
+//Usuario usuarios[0];
 int usuarioN = 0;
 array<Libro, 10> libros;
 int librosN = 0;
@@ -26,8 +27,7 @@ void admin() {
 	int edad = 20;
 	double dinero = 1000;
 	agregarUsuario(Usuario(user, contra, nom, edad, dinero));
-//	usuarios[usuarioN++] = Usuario(user, contra, nom, edad, dinero);
-	usuarioN++;
+	usuarios[usuarioN++] = Usuario(user, contra, nom, edad, dinero);
 }
 
 int menuP() {
@@ -88,7 +88,7 @@ void crearUser() {
 	cin >> edad;
 	cout << "Cuanto dinero tiene: ";
 	cin >> dinero;
-	agregarUsuario(Usuario(name, contra, nombre, edad ,dinero));
+	usuarios[usuarioN++] = Usuario(name, contra, nombre, edad ,dinero);
 }
 
 int menuUser() {
@@ -103,6 +103,16 @@ int menuUser() {
 	return op;
 }
 
+void listarLibros() {
+	int i = 0;
+	for(Libro libro : libros) {
+		if(libro.getTitulo() != "") {
+			cout << i  << libro.getTitulo();
+		}
+		i++;
+	}
+}
+
 int menuAdmin() {
 	int op; 
 	cout << "1. Agregar libro\n2. Modificar libro\n3. Eliminar libro\n";
@@ -112,6 +122,10 @@ int menuAdmin() {
 		return menuAdmin();
 	}
 	return op;
+}
+
+void modificar(int x) {
+	
 }
 
 void crearLibro() {
@@ -154,6 +168,15 @@ int main() {
 		if (userAct.getUser() != "nulooo?") {
 			if(userAct.getUser() == "n.duron" && userAct.getContra() == "sybase") {
 				subOp = menuAdmin();
+				switch (subOp) {
+					case 1:
+						crearLibro();
+					break;
+					case 2:
+						listarLibros();
+												
+					break;
+				}
 			} else {
 				subOp = menuUser();
 				switch (subOp) {
