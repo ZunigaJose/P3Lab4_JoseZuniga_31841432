@@ -1,6 +1,12 @@
 #include <iostream>
-#include "usuario.cpp"
+#include <array>
+#include "usuario.hpp"
+#include "libro.hpp"
 using namespace std;
+
+void admin() {
+	
+}
 
 int menuP() {
 	int op; 
