@@ -4,7 +4,7 @@
 #include "libro.hpp"
 using namespace std;
 
-Usuario usuarios[1];
+Usuario usuarios[0];
 int usuarioN = 0;
 array<Libro, 10> libros;
 int librosN = 0;
@@ -25,7 +25,9 @@ void admin() {
 	string nom = "Nicolle Duron";
 	int edad = 20;
 	double dinero = 1000;
-	usuarios[usuarioN++] = Usuario(user, contra, nom, edad, dinero);
+	agregarUsuario(Usuario(user, contra, nom, edad, dinero));
+//	usuarios[usuarioN++] = Usuario(user, contra, nom, edad, dinero);
+	usuarioN++;
 }
 
 int menuP() {
