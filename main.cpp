@@ -9,6 +9,7 @@ int usuarioN = 0;
 array<Libro, 10> libros;
 int librosN = 0;
 Usuario userAct;
+bool ingreso = false;
 
 void admin() {
 	string user = "n.duron";
@@ -16,7 +17,7 @@ void admin() {
 	string nom = "Nicolle Duron";
 	int edad = 20;
 	double dinero = 1000;
-	usuarios[usuarioN] = Usuario(user, contra, nom, edad, dinero);
+	usuarios[usuarioN++] = Usuario(user, contra, nom, edad, dinero);
 }
 
 int menuP() {
@@ -45,16 +46,37 @@ void logIn() {
 			if(usuario1.getContra() == contra) {
 				cout << "Ingreso Exitoso!!" << endl << endl;
 				entro = true;
+				ingreso = true;
 				userAct = usuario1;
 				}
 			}
-			if(!entro) {
+			if(!entro && encontro) {
 				cout << "\aContraseña Invalida!!\a" << endl;
+				ingreso = false;
+				break;
 			}
 		}
 	if(!encontro) {
 		cout << "\aUsuario no existe!!\a" << endl;
+		ingreso = false;
 	}
+}
+
+void crearUser() {
+	string name, nombre, contra;
+	int edad;
+	double dinero;
+	cout << "Ingrese su nombre de Usuario: ";
+	cin >> name;
+	cout << "Ingrese su contraseña: ";
+	cin >> contra;
+	cout << "Ingrese su nombre: ";
+	cin >> nombre;
+	cout << "Ingrese su edad: ";
+	cin >> edad;
+	cout << "Cuanto dinero tiene: ";
+	cin >> dinero;
+	usuarios[usuarioN++] = Usuario(name, contra, nombre, edad ,dinero);
 }
 
 int main() {
@@ -65,9 +87,13 @@ int main() {
 		switch (opMain) {
 			case 1:
 				logIn();
-			break; 
+			break;
+			case 2:
+				crearUser();
+				cout << "Usuario creado exitosamente!\a" <<endl;
+			break;
 		}
 
-	} while (!opMain);
+	} while (opMain);
 	return 0;
 }
