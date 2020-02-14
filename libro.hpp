@@ -10,7 +10,7 @@ class Libro {
 		int anio;
 
 	public: 
-		Libro();
+		Libro(){};
 		Libro(string tit, string atr, bool ven, double pre, int an);
 		void setVendido() {vendido = !vendido;}
 		void setAnio(int an) {anio = an;}

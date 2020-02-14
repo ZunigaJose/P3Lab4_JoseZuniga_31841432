@@ -1,7 +1,7 @@
 #include <string>
-#include "libros.cpp"
+#include "libro.hpp"
 
-Libros::Libros(string tit, string atr, bool ven, double pre, int an) {
+Libro::Libro(string tit, string atr, bool ven, double pre, int an) {
 	titulo = tit;
 	autor = atr;
 	vendido = ven;
