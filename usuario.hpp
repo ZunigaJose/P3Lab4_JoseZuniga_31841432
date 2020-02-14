@@ -16,6 +16,7 @@ class Usuario {
 		string getUser() {return user;};
 		string getContra() {return contra;};
 		string getNombre() {return nombre;};
+		void setNombre(string nom) { nombre = nom;}
 		int getEdad() {return edad;};
 		double getDinero() {return dinero;};
 		void compra(double x) {dinero -= x;};

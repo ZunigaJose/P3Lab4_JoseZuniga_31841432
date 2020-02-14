@@ -4,12 +4,20 @@
 #include "libro.hpp"
 using namespace std;
 
-array<Usuario, 10> usuarios;
+array<Usuario, 1> usuarios;
 int usuarioN = 0;
 array<Libro, 10> libros;
 int librosN = 0;
 Usuario userAct;
 bool ingreso = false;
+
+void agregarArr(Usuario user) {
+	array<Usuario, usuarioN +1> copia;
+	for (int i = 0; i < usuarioN; i++) {
+		copia[i] = usuarios[i];
+	}
+	copia[usuariosN + 1] = user;
+}
 
 void admin() {
 	string user = "n.duron";
@@ -59,6 +67,8 @@ void logIn() {
 	if(!encontro) {
 		cout << "\aUsuario no existe!!\a" << endl;
 		ingreso = false;
+		userAct = Usuario();
+		userAct.setNombre("nulooo?");//No se sinceramente
 	}
 }
 
@@ -76,24 +86,91 @@ void crearUser() {
 	cin >> edad;
 	cout << "Cuanto dinero tiene: ";
 	cin >> dinero;
-	usuarios[usuarioN++] = Usuario(name, contra, nombre, edad ,dinero);
+	agregarUsuario(Usuario(name, contra, nombre, edad ,dinero));
+}
+
+int menuUser() {
+	int op;
+	cout << "1. Comprar libro\n2.Buscar por autor\n3.Buscar por título\n";
+	cout << "4.Agregar dinero a mi cuenta\5.Restablecer contraseña\n6.Borrar cuenta: ";
+	cin >> op;
+	if (op < 1 || op > 6) {
+		cout << "\aOpcion no valida!!";
+		return menuUser();
+	}
+	return op;
+}
+
+int menuAdmin() {
+	int op; 
+	cout << "1. Agregar libro\n2. Modificar libro\n3. Eliminar libro\n";
+	cout <<	"4. Borrar registro de libros: ";
+	cin >> op;
+	if(op > 4 || op < 1) {
+		return menuAdmin;
+	}
+	return op;
+}
+
+void crearLibro() {
+        string titulo, autor;
+        bool vendido = false;
+	int anio;
+        double precio;
+        cout << "Ingrese el nombre del Libro: ";
+        cin >> titulo;
+        cout << "Ingrese el nombre del autor: ";
+        cin >> autor;
+        cout << "Ingrese el año de publicacion: ";
+        cin >> anio;
+        cout << "Ingrese el precio: ";
+        cin >> precio;
+        libros[librosN++] = Libro(titulo, autor, false, anio, precio);
 }
 
 int main() {
 	admin();
 	int opMain;
+	int subOp;
 	do {
 		opMain = menuP();
-		switch (opMain) {
-			case 1:
-				logIn();
-			break;
-			case 2:
-				crearUser();
-				cout << "Usuario creado exitosamente!\a" <<endl;
-			break;
+		if (!ingreso) {
+			switch (opMain) {
+				case 1:
+					logIn();
+				break;
+				case 2:
+					if (usuarioN < 9) {
+					crearUser();
+					cout << "Usuario creado exitosamente!\a" <<endl;
+					} else {
+						cout << "No es posible crear el usuario!\a";
+					}
+				break;
+			}
 		}
-
+		if (userAct.getUser() != "nulooo?") {
+			if(userAct.getUser() == "n.duron" && userAct.getContra() == "sybase") {
+				subOp		
+			} else {
+				subOp = menuUser();
+				switch (subOp) {
+					case 1:
+						
+					break;
+					case 2:
+					break;
+					case 3:
+					break;
+					case 4:
+					break;
+					case 5:
+					break;
+					case 6: 
+					break;
+				}
+			}
+		}
 	} while (opMain);
 	return 0;
 }
