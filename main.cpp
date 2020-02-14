@@ -4,19 +4,19 @@
 #include "libro.hpp"
 using namespace std;
 
-array<Usuario, 1> usuarios;
+Usuario usuarios[1];
 int usuarioN = 0;
 array<Libro, 10> libros;
 int librosN = 0;
 Usuario userAct;
 bool ingreso = false;
 
-void agregarArr(Usuario user) {
-	array<Usuario, usuarioN +1> copia;
+void agregarUsuario(Usuario user) {
+	Usuario copia[usuarioN + 1];
 	for (int i = 0; i < usuarioN; i++) {
 		copia[i] = usuarios[i];
 	}
-	copia[usuariosN + 1] = user;
+	copia[usuarioN + 1] = user;
 }
 
 void admin() {
@@ -107,7 +107,7 @@ int menuAdmin() {
 	cout <<	"4. Borrar registro de libros: ";
 	cin >> op;
 	if(op > 4 || op < 1) {
-		return menuAdmin;
+		return menuAdmin();
 	}
 	return op;
 }
@@ -151,7 +151,7 @@ int main() {
 		}
 		if (userAct.getUser() != "nulooo?") {
 			if(userAct.getUser() == "n.duron" && userAct.getContra() == "sybase") {
-				subOp		
+				subOp = menuAdmin();
 			} else {
 				subOp = menuUser();
 				switch (subOp) {
